@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --purple-color: #6C63FF;
+  --white-color: #ffffff;
+  --white-gray-color: #404246;
+}
+
+body {
+  background-color: var(--white-color);
+  
+}
+
+.header-style{
+  background-color: var(--purple-color);
+} 
+
+.hover-a{
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.hover-a:hover{
+  transition: 0.4s;
+  color: var(--white-gray-color)
+}
+
+.info-contact h1{
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+.chat-button {
+  transition: 0.4s;
+  background-color: var(--purple-color);
+  margin-top: 20px;
+}
+
+.chat-button:hover{
+  transition: 0.4s;
+  background-color: var(--white-gray-color)
+}
