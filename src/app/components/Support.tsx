@@ -11,6 +11,10 @@ const Support = ({nameConversation, firstMessage, typeUser}: any) => {
   useEffect(() => {
     const newSocket = io('http://localhost:3001');
     
+    newSocket.on("message", (response) => {
+      setMessages((prevMessages: any) => [...prevMessages, {name: response.name, res: response.res}]);
+    });
+
     setSocket(newSocket);
 
     return () => {
@@ -21,10 +25,11 @@ const Support = ({nameConversation, firstMessage, typeUser}: any) => {
   }, []);
 
     const sendMessage = () => {
+      socket.emit("message", {name: typeUser, res: message});
       setMessages((prevMessages: any) => [...prevMessages, {name: typeUser, res: message}]);
       setMessage(""); 
     }
-    
+
     return (
       <div className="fixed bottom-4 right-4 bg-white p-4 shadow-md rounded-md animate-fade-in">
         <div className="flex items-center">
@@ -53,6 +58,7 @@ const Support = ({nameConversation, firstMessage, typeUser}: any) => {
           <textarea
             className="w-full h-16 p-2 border border-gray-300 rounded-md"
             placeholder="Enter your message..."
+            value={message}
             onChange={(e: any) => setMessage(e.target.value)}
           ></textarea>
           <button onClick={sendMessage} className="chat-button mt-2 text-white py-2 px-4 rounded-md">

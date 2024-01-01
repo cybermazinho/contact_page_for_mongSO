@@ -83,8 +83,9 @@ const Chat = ({ setModalSuport, setModalGPT, setTypeUser, setNameConversation, s
         </div>
         <div className="mt-4">
           <textarea
-            className="w-full h-16 p-2 border border-gray-300 rounded-md"
+            className="input-clear w-full h-16 p-2 border border-gray-300 rounded-md"
             placeholder="Enter your message..."
+            value={message}
             onChange={(e: any) => setMessage(e.target.value)}
           ></textarea>
           <button onClick={sendMessage} className="chat-button mt-2 text-white py-2 px-4 rounded-md">
