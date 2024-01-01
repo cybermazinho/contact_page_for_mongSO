@@ -4,7 +4,7 @@ import { Socket, io } from "socket.io-client";
 
 const Support = ({nameConversation, firstMessage, typeUser}: any) => {
 
-  const [socket, setSocket] = useState<Socket<DefaultEventsMap, DefaultEventsMap> | null>(null);
+  const [socket, setSocket] = useState<Socket | null>(null);
   const [message, setMessage] = useState<string>("")
   const [messages, setMessages] = useState<{ name: string; res: string }[]>([]);
 
@@ -30,11 +30,11 @@ const Support = ({nameConversation, firstMessage, typeUser}: any) => {
   }, []);
 
     const sendMessage = () => {
-      if(message !== ""){
-      socket.emit("message", {name: typeUser, res: message});
-      setMessages((prevMessages: Message[]) => [ ...prevMessages, { name: typeUser, res: message }]);
-      setMessage(""); 
-    }}
+      if(message !== "" && socket){
+        socket.emit("message", {name: typeUser, res: message});
+        setMessages((prevMessages: Message[]) => [ ...prevMessages, { name: typeUser, res: message }]);
+        setMessage(""); 
+      }}
 
     return (
       <div className="fixed bottom-4 right-4 bg-white p-4 shadow-md rounded-md animate-fade-in">
