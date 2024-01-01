@@ -14,12 +14,9 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-  console.log(socket.id)
-
   socket.on("message", res => {
     socket.broadcast.emit('message', res)
   })
-
 });
 
 app.use(cors());

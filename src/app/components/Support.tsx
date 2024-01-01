@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from "react";
-import { io } from "socket.io-client";
+import { Socket, io } from "socket.io-client";
 
 const Support = ({nameConversation, firstMessage, typeUser}: any) => {
 
