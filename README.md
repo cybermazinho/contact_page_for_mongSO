@@ -29,3 +29,11 @@ After creating your account and redeeming your key, place it in the .env.local_e
 Open [https://app.edenai.run/bricks/default](https://app.edenai.run/bricks/default)
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Technologies used
+
+```bash
+NEXT.JS, Tailwind CSS, SOCKET.IO, EXPRESS e GPT3.5
+```
+
+![img](./public/estrutura.png)
