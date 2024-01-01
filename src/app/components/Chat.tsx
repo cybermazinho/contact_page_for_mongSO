@@ -3,11 +3,19 @@
 import { useState } from "react";
 import axios from 'axios';
 
-const Chat = ({ setModalSuport, setModalGPT }: any) => {
+const Chat = ({ setModalSuport, setModalGPT, setTypeUser, setNameConversation, setFirstMessage}: any) => {
 
-  const [message, setMessage] = useState<string>("")
-  const [messages, setMessages] = useState<{ name: string; res: string }[]>([]);
-  const [typing, setTyping] = useState(false);
+    const [message, setMessage] = useState<string>("")
+    const [messages, setMessages] = useState<{ name: string; res: string }[]>([]);
+    const [typing, setTyping] = useState(false);
+
+    const updateUser = () => {
+      setNameConversation("Human support")
+      setFirstMessage("Please wait a moment and you will be assisted by human support")
+      setTypeUser("user")
+      setModalGPT(false)
+      setModalSuport(true)
+    }
 
     const sendMessage = () => {
       setMessages((prevMessages: any) => [...prevMessages, {name: "user", res: message}]);
@@ -21,7 +29,7 @@ const Chat = ({ setModalSuport, setModalGPT }: any) => {
         method: "POST",
         url: "https://api.edenai.run/v2/text/question_answer",
         headers: {
-          authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiM2NhNDI5MWItNzU4My00MDhkLTk1ZTItYmNlY2I5NmNjYTU3IiwidHlwZSI6ImFwaV90b2tlbiJ9.389O_LbenyRydrHhkwC_E0n79kiqbq0WU_KiUK2S_kk",
+          authorization: "Bearer token",
         },
         data: {
           texts: [
@@ -82,7 +90,7 @@ const Chat = ({ setModalSuport, setModalGPT }: any) => {
           <button onClick={sendMessage} className="chat-button mt-2 text-white py-2 px-4 rounded-md">
             Send
           </button>
-          <a href="#" onClick={() => {setModalSuport(true), setModalGPT(false)}}  className="ml-2 text-sm text-gray-500 hover:underline">Talk to support</a>
+          <a href="#" onClick={updateUser}  className="ml-2 text-sm text-gray-500 hover:underline">Talk to support</a>
         </div>
       </div>
     );

@@ -13,9 +13,13 @@ export default function Home() {
   const [modalGPT, setModalGPT] = useState(false);
   const [modalsuport, setModalSuport] = useState(false);
 
+  const [typeUser, setTypeUser] = useState("user");
+  const [nameConversation, setNameConversation] = useState("Human support");
+  const [firstMessage, setFirstMessage] = useState("Wait a moment, human support will assist you.");
+
   return (
     <>
-      <Header />
+      <Header setModalSuport={setModalSuport} setModalGPT={setModalGPT} setTypeUser={setTypeUser} setNameConversation={setNameConversation} setFirstMessage={setFirstMessage}/>
       <main className="flex min-h-screen flex-row justify-evenly items-flex-start p-24">
           <div className="info-contact animate-fade-in">
             <h1 className="text-3xl font-semibold leading-6 text-gray-900  mb-4 lg:mb-0 lg:mr-4 ">How can I contact support?</h1>
@@ -29,8 +33,8 @@ export default function Home() {
           height={500}
           className="img-resize animate-fade-in"
         />
-      { modalGPT && <Chat setModalSuport={setModalSuport} setModalGPT={setModalGPT} /> }
-      { modalsuport && <Support/> }
+      { modalGPT && <Chat setModalSuport={setModalSuport} setModalGPT={setModalGPT} setTypeUser={setTypeUser} setNameConversation={setNameConversation} setFirstMessage={setFirstMessage} /> }
+      { modalsuport && <Support nameConversation={nameConversation} firstMessage={firstMessage} typeUser={typeUser} /> }
       </main>
     </>
   );
