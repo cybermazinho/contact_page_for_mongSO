@@ -8,11 +8,16 @@ const Support = ({nameConversation, firstMessage, typeUser}: any) => {
   const [message, setMessage] = useState<string>("")
   const [messages, setMessages] = useState<{ name: string; res: string }[]>([]);
 
+  interface Message {
+    name: string;
+    res: string; 
+  }
+
   useEffect(() => {
     const newSocket = io('http://localhost:3001');
     
     newSocket.on("message", (response) => {
-      setMessages((prevMessages: any) => [...prevMessages, {name: response.name, res: response.res}]);
+      setMessages((prevMessages: Message[]) => [...prevMessages, {name: response.name, res: response.res}]);
     });
 
     setSocket(newSocket);
@@ -25,10 +30,11 @@ const Support = ({nameConversation, firstMessage, typeUser}: any) => {
   }, []);
 
     const sendMessage = () => {
+      if(message !== ""){
       socket.emit("message", {name: typeUser, res: message});
-      setMessages((prevMessages: any) => [...prevMessages, {name: typeUser, res: message}]);
+      setMessages((prevMessages: Message[]) => [ ...prevMessages, { name: typeUser, res: message }]);
       setMessage(""); 
-    }
+    }}
 
     return (
       <div className="fixed bottom-4 right-4 bg-white p-4 shadow-md rounded-md animate-fade-in">

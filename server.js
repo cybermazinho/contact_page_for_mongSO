@@ -28,6 +28,6 @@ app.get("/", (req, res) => {
   res.status(200).send("On").end()
 })
 
-server.listen(3001, () => {
+server.listen(process.env.PORT || 3001, () => {
   console.log('server running!');
 });
